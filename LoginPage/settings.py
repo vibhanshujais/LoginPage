@@ -73,13 +73,14 @@ WSGI_APPLICATION = 'LoginPage.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+# mysql data base is integrated below
+# Use your credentials to setup database.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'signupdata',
         'USER': 'root',
-        'PASSWORD': 'J@iswal9971',
+        'PASSWORD': '********',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -129,11 +130,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_HOST = 'smtp.gmail .com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'vibhanshujaiswal28@gmail.com'
-EMAIL_HOST_PASSWORD = 'jaiswal9971'
+EMAIL_HOST_USER = '**********************'
+EMAIL_HOST_PASSWORD = '***************'
 
 
 STATICFILES_DIRS = [BASE_DIR, "static"]
