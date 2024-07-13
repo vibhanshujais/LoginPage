@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        header {
+            background-color: rgb(236, 235, 235);
+            height: 75px;
+        }
+        img{
+            border-radius: 50%;
+            width: 75px;
+            height: 75px;
+            float: right;
+            margin-right: 20px;
+        }
+        ul{
+            list-style: none;
+            display: none;
+        }
+        #list{
+            width: 400px;
+            font-size: 30px;
+            padding: 20px;
+            display: none;
+        }
+        
+        div{
+            position: absolute;
+            right: 20px;
+        }
+        div:hover{
+            cursor: pointer;
+        }
+    </style>
+
+    <script>   
+        function showInfo(){
+            var itemList = document.getElementById("list");            
+            if (itemList.style.display === 'none' || itemList.style.display === '') {
+                itemList.style.display = 'block';
+            } else {
+                itemList.style.display = 'none';
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <header>
+            <div id="dp" class="dp">
+                <img src="../static/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg" alt="" onclick="showInfo()">
+            </div>
+    </header>
+   
+    <ul id="">
+        {% for i in key %}
+        <li> {{i}} </li>
+        {% endfor %}
+    </ul>
+
+    <table id="list" celspancing="50" cellpadding="50">
+        <tr>
+            <td>
+                <table id="list1" celspancing="50" cellpadding="20">
+                    <tr>
+                        <th>Name</th></tr>
+                        <tr><th>Username</th></tr>
+                        <tr><th>Contact</th></tr>
+                        <tr><th>Email ID</th>
+                    </tr>        
+                </table>
+            </td>
+            <td>
+                <table id="list2" celspancing="50" cellpadding="20">
+                    {% for i in key %}
+                    <tr>
+                        <td>{{ i }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>   
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

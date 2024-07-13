@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <style>
+        .strength-meter {
+            height: 10px;
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0;
+            background-color: red;
+            border-radius: 5px;
+        }
+
+        .strength-text {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        .match-status {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+
+        .match {
+            color: green;
+        }
+
+        .no-match {
+            color: red;
+        }
+    </style>
+    <script>
+        /**
+         * Function to check the strength of the password and update the strength meter and text.
+         * 
+         * @param {Event} event - The event object that triggered the function.
+         */
+        function checkPasswordStrength() {
+            const password = document.getElementById('pass').value;
+            const strengthBar = document.getElementById('strength-bar');
+            const strengthText = document.getElementById('strength-text');
+            
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/)) strength++;
+            if (password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            switch (strength) {
+                case 0:
+                case 1:
+                    strengthBar.style.width = '20%';
+                    strengthBar.style.backgroundColor = 'red';
+                    strengthText.textContent = 'Very Weak';
+                    break;
+                case 2:
+                    strengthBar.style.width = '40%';
+                    strengthBar.style.backgroundColor = 'orange';
+                    strengthText.textContent = 'Weak';
+                    break;
+                case 3:
+                    strengthBar.style.width = '60%';
+                    strengthBar.style.backgroundColor = 'yellow';
+                    strengthText.textContent = 'Medium';
+                    break;
+                case 4:
+                    strengthBar.style.width = '80%';
+                    strengthBar.style.backgroundColor = 'blue';
+                    strengthText.textContent = 'Strong';
+                    break;
+                case 5:
+                    strengthBar.style.width = '100%';
+                    strengthBar.style.backgroundColor = 'green';
+                    strengthText.textContent = 'Very Strong';
+                    break;
+            }
+        }
+
+        /**
+         * Function to check if the password and confirm password matches.
+         * 
+         * @param {Event} event - The event object that triggered the function.
+         */
+        function checkPasswordMatch() {
+            const password = document.getElementById('pass').value;
+            const confirmPassword = document.getElementById('cpass').value;
+            const matchStatus = document.getElementById('match-status');
+            
+            if (password === confirmPassword) {
+                matchStatus.textContent = 'Password match';
+                matchStatus.className = 'match-status match';
+            } else {
+                matchStatus.textContent = 'Password do not match';
+                matchStatus.className = 'match-status no-match';
+            }
+        }
+    </script>
+</head>
+<body>
+    {{ error }}
+    <form action="/" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>
+                    <label for="name">Full Name: </label>
+                </td>
+                <td>
+                    <input type="text" name="name" id="name" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="username">Username: </label>
+                </td>
+                <td>
+                    <input type="text" name="username" id="username" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="num">Contact: </label>
+                </td>
+                <td>
+                    <input type="number" name="num" id="num" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="email">Email ID: </label>
+                </td>
+                <td>
+                    <input type="email" name="email" id="email" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="pass">Password: </label>
+                </td>
+                <td>
+                    <input type="password" name="pass" id="pass" required oninput="checkPasswordStrength()">
+                </td>
+                <td>
+                    <div class="strength-meter">
+                        <div id="strength-bar" class="strength-bar"></div>
+                    </div>
+                    <div id="strength-text" class="strength-text"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="cpass">Cofirm Password: </label>
+                </td>
+                <td>
+                    <input type="password" name="cpass" id="cpass" required oninput="checkPasswordMatch()">
+                </td>
+                <td>
+                    <div id="match-status" class="match-status"></div>
+                </td>
+            </tr>
+                <td>
+                    <button onclick="validate()">Sign Up</button>
+                </td>
+            </tr>
+        </table>    
+    </form>
+    <a href="/">Login</a>
+</body>
+</html>
